@@ -1636,13 +1636,18 @@ class ViewsConfiguratorMixin(object):
 
           .. code-block:: python
 
-            from pyramid.httpexceptions import HTTPMovedPermanently
-            config.add_notfound_view(append_slash=HTTPMovedPermanently)
+            from pyramid.httpexceptions import HTTPTemporaryRedirect
+            config.add_notfound_view(append_slash=HTTPTemporaryRedirect)
 
         The above means that a redirect to a slash-appended route will be
         attempted, but instead of :class:`~pyramid.httpexceptions.HTTPFound`
-        being used, :class:`~pyramid.httpexceptions.HTTPMovedPermanently will
+        being used, :class:`~pyramid.httpexceptions.HTTPTemporaryRedirect will
         be used` for the redirect response if a slash-appended route is found.
+
+        :class:`~pyramid.httpxceptions.HTTPTemporaryRedirect` is equivalent to
+        :class:`~pyramid.httpexceptions.HTTPFound`, with addition of keeping
+        original HTTP method. This is typically useful when redirecting POST
+        HTTP requests.
 
         .. versionadded:: 1.3
 
